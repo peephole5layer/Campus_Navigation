@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Path Result</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <style>
+        #map {
+            height: 400px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+<h1>Shortest Path</h1>
+<p>Path: ${path}</p>
+<div id="map"></div>
+<a href="/">Back</a>
+
+<script>
+    // Initialize the map
+    const map = L.map('map').setView([29.375425, 79.530862], 15); // Example coordinates
+
+    // Add OpenStreetMap tiles
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 18,
+        attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
+
+    // Example: Add markers for the source and destination
+    const path = ${path}; // Path coordinates (server-side to client-side binding)
+    const coordinates = {
+        "A": [37.7749, -122.4194], // Example location of node A
+        "B": [37.7789, -122.4194], // Example location of node B
+        "C": [37.7799, -122.4234]  // Example location of node C
+    };
+
+    // Place markers for each point on the path
+    path.forEach((node, index) => {
+        const latLng = coordinates[node];
+        if (latLng) {
+            L.marker(latLng).addTo(map).bindPopup(`${node}`).openPopup();
+        }
+
+        // Draw a line between points
+        if (index > 0) {
+            const previousLatLng = coordinates[path[index - 1]];
+            if (previousLatLng) {
+                L.polyline([previousLatLng, latLng], { color: 'blue' }).addTo(map);
+            }
+        }
+    });
+</script>
+</body>
+</html>

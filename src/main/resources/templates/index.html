@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campus Navigation</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <style>
+        #map {
+            height: 400px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+<h1>Campus Navigation System</h1>
+<form action="/navigate" method="post">
+    <label for="source">Source:</label>
+    <input type="text" id="source" name="source" required>
+    <label for="destination">Destination:</label>
+    <input type="text" id="destination" name="destination" required>
+    <button type="submit">Find Path</button>
+</form>
+
+<!-- Map container -->
+<div id="map"></div>
+
+<script>
+    // Initialize the map and set view to the campus
+    const map = L.map('map').setView([29.375425, 79.5306862], 15); // Example coordinates
+
+    // Add OpenStreetMap tiles
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 18,
+        attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
+
+    // Add markers or other map elements dynamically in the result page
+</script>
+</body>
+</html>
