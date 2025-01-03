@@ -25,17 +25,17 @@ public class NavigationController {
         coordinates = new HashMap<>();
 
         // Initialize the graph with nodes and edges
-        campusMap.addNode("A");
-        campusMap.addNode("B");
-        campusMap.addNode("C");
-        campusMap.addEdge("A", "B", 5);
-        campusMap.addEdge("B", "C", 10);
-        campusMap.addEdge("A", "C", 15);
+        campusMap.addNode("Main-Gate");
+        campusMap.addNode("Library");
+        campusMap.addNode("Canteen");
+        campusMap.addEdge("Main-Gate", "Library", 5);
+        campusMap.addEdge("Main-Gate", "Canteen", 10);
+        campusMap.addEdge("Library", "Canteen", 15);
 
         // Add coordinates for each node
-        coordinates.put("A", new double[]{37.7749, -122.4194});
-        coordinates.put("B", new double[]{37.7789, -122.4194});
-        coordinates.put("C", new double[]{37.7799, -122.4234});
+        coordinates.put("Main-Gate", new double[]{37.7749, -122.4194});
+        coordinates.put("Library", new double[]{37.7789, -122.4194});
+        coordinates.put("Canteen", new double[]{37.7799, -122.4234});
     }
 
     @PostMapping("/navigate")
